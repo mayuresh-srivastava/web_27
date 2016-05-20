@@ -8,11 +8,12 @@
   
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-	 <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
   <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <link href="css/master.css" rel="stylesheet" type="text/css"/>
+  <link href="css/master.css" rel="stylesheet" type="text/css"/>
 </head>
 <body>
   
@@ -20,7 +21,28 @@
 		<div class="header-inner">
 		<div class="row">
 			<div class="col-xs-3 col-sm-6">
-				 <div class="icon-container"><img src="img/menu.png" data-toggle="collapse" data-target=".main-menu" aria-hidden="true"></img></div>
+				 <div class="icon-container">
+				   
+				<% client = Contentful::Client.new(
+  access_token: '4a08907fda227704d43a516981fe057f7fdbe90ecf094b58118003ece3c84fbe',
+  space: 'i3qt1vuoqo6u',
+  dynamic_entries: :auto
+  )
+  
+          @c1 = client.asset('4G9eBX54F2ecIEMc2yk6sa').image_url
+          @c2 = client.asset('5FYYUbxIacIKe80kuQqOmI').image_url
+          @c3 = client.asset('7AIew9yF1eKUG8y8qyMmG0').image_url
+          @menu = client.asset('2fCEU0gJGUMaw2s2aQiKiM').image_url
+          @search = client.asset('4rkCn76Ffyk8YigEiCa0W').image_url
+          @share = client.asset('3q5ym9HkzCmwswCQYyYEqU').image_url 
+          @footer2 = client.entry '7svpjyfW6cmC46MgaWiUGe'
+          @ssection = client.entry '2Ku3sQvAHSGSccOSE6MwSi'
+          @footer1 = client.entry '1ovyEWh7GA8s4mKgmM2oEc'
+          %>
+          
+		  <img src="<%= @menu %>" data-toggle="collapse" data-target=".main-menu" aria-hidden="true"></img>
+				  
+				  </div>
 				  <!-- <ul class="main-menu">
                     <li><a href="#"></a></li>
 					<li><a href="#"></a></li>
@@ -30,8 +52,8 @@
 			</div>
 			<div class="col-xs-9 col-sm-6">
 				<div class="side-menu">
-					<div class="icon-container"><a href="#"><img src="img/search.png"/></a></div>
-					<div class="icon-container"><a href="#"><img src="img/share.png" /></a></div>
+					<div class="icon-container"><a href="#"><img src="<%= @search %>"/></a></div>
+					<div class="icon-container"><a href="#"><img src="<%= @share %>" /></a></div>
 				</div>
 			</div>
 		</div>
@@ -53,15 +75,15 @@
     <!-- Wrapper for slides -->
     <div class="carousel-inner" role="listbox">
       <div class="item active">
-        <img src="img/C14071_PCW_CarouselImages-1.jpg"  >
+        <img src="<%= @c1 %>" >
       </div>
 
       <div class="item">
-        <img src="img/C14071_PCW_CarouselImages-2.jpg" >
+        <img src="<%= @c2 %>">
       </div>
     
       <div class="item">
-        <img src="img/C14071_PCW_CarouselImages-3.jpg" >
+        <img src=" <%= @c3 %>" >
       </div>
 
     </div>
@@ -81,14 +103,18 @@
 	</section>
       <section id="stocklist">
 
-          <h2 class="center_align">Where to buy?</h2>
-          <h4 class="center_align">Enter your suburb or postcode to find your nearest stocklist</h4>
+          <h2 class="center_align">
+          	
+          	<%= @ssection.fields[:title] %>
+          	
+          </h2>
+          <h4 class="center_align"><%= @ssection.fields[:description] %></h4>
           <div class="row">
               <div class="col-xs-6 col-xs-offset-3">
                   <form>
 
                       <input type=" text" name="postcode" id="postcode" class="center_align_input">
-                      <input type="submit" value="FIND STOCKLIST" id="submit_button">
+                      <input type="submit" value="<%= @ssection.fields[:button] %>" id="submit_button">
 
                   </form>
               </div>
@@ -102,16 +128,16 @@
 				<div class="row">
 					<div class="col-xs-12 col-sm-6">
 						<ul class="footer-main-list list-1">
-							<li><a href="#"><b>Home</b></a></li>
+							<li><a href="<%= @footer1.fields[:homeUrl] %>" target="_blank"><%= @footer1.fields[:home] %></li>
 							<li>
-								<a href="#"><b>Protecting you pet <br>Treatment Selector</b></a>
+								<a href="<%= @footer1.fields[:protectUrl] %>" target="_blank"><%= @footer1.fields[:prtct] %></a>
 								<ul class="footer-sub-list">
 								<li><a href="#">Dog</a></li>
 								<li><a href="#">Cat</a></li>
 								</ul>
 								</li>
 								<li>
-								<a href="#"><b>Offers</b></a>
+								<a href="<%= @footer1.fields[:offerUrl] %>" target="_blank"><%= @footer1.fields[:offer] %></a>
 								<ul class="footer-sub-list">
 								<li><a href="#">Competition</a></li>
 								<li><a href="#">Entry Form</a></li>
@@ -122,7 +148,7 @@
 					<div class="col-xs-12 col-sm-6 col-md-5 col-md-offset-1">
 						<ul class="footer-main-list">
 					<li>
-						<a href="#"><b>Products</b></a>
+						<a href="<%= @footer1.fields[:productURL] %>" target="_blank"><%= @footer1.fields[:product] %></a>
 						<ul class="footer-sub-list">
 							<li><a href="#">abc</a></li>
 							<li><a href="#">def</a></li>
@@ -133,20 +159,20 @@
 						</ul>
 					</li>
 					<li>
-						<a href="#"><b>News</b></a>
+						<a href="<%= @footer1.fields[:newsUrl] %>" target="_blank"><%= @footer1.fields[:news] %></a>
 						<ul class="footer-sub-list">
 							<li><a href="#">Posting</a></li>
 						</ul>
 					</li>
-					<li><a href="#"><b>Find Stockist</b></a></li>
+					<li><a href="<%= @footer1.fields[:fslUrl] %>" target="_blank"><%= @footer1.fields[:fsl] %></a></li>
 				</ul>
 					</div>
 				</div>
 			</div>
 			<div class="col-xs-12 col-sm-3 col-md-3 col-lg-2 col-lg-offset-1">
 				<div class="side-menu">
-					<div class="icon-container"><a href="#"><img src="img/search.png"/></a></div>
-					<div class="icon-container"><a href="#"><img src="img/share.png"/></a></div>
+					<div class="icon-container"><a href="#"><img src="<%= @search %>"/></a></div>
+					<div class="icon-container"><a href="#"><img src="<%= @share %>"/></a></div>
 				</div>
 			</div>
 		</div>
@@ -156,11 +182,11 @@
 			<div class="row">
 				 <div class="col-xs-6 col-sm-8">
                             <ul class="list-inline clearfix">
-								<li class=""><a href="#" target="_blank">Sri Lanka</a></li>
-								<li class=""><a href="#" target="_blank">Contact</a></li>
-								<li class=""><a href="#">Terms of Use</a></li>
-								<li class=""><a href="#">Privacy</a></li>
-								<li class=""><a href="#">Trademark</a></li>
+								<li class=""><a href="<%= @footer2.fields[:ahd] %>" target="_blank"><%= @footer2.fields[:ahdd] %></a></li>
+								<li class=""><a href="<%= @footer2.fields[:contact] %>" target="_blank"><%= @footer2.fields[:ctnt] %></a></li>
+								<li class=""><a href="<%= @footer2.fields[:touUrl] %>" target="_blank"><%= @footer2.fields[:tou] %></a></li>
+								<li class=""><a href="<%= @footer2.fields[:prurl] %>" target="_blank"><%= @footer2.fields[:privacy] %></a></li>
+								<li class=""><a href="<%= @footer2.fields[:tmurl] %>" target="_blank"><%= @footer2.fields[:tm] %></a></li>
                             </ul>
                  </div>
 				 <div class="col-xs-6 col-sm-4">

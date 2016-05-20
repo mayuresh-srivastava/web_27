@@ -1,0 +1,209 @@
+@font-face {
+    font-family: pantonBold;
+    src: url("../fonts/Panton-Bold.otf"); 
+}
+
+@font-face {
+    font-family:pantonRegular;
+    src: url("../fonts/Panton-Regular.otf"); 
+}
+@font-face {
+    font-family:helveticaBold;
+    src: url("../fonts/HelveticaNeueLTStd-Bd.otf"); 
+}
+@font-face {
+    font-family:helveticaRoman;
+    src: url("../fonts/HelveticaNeueLTStd-Roman.otf"); 
+}
+body, html{
+    font-size: 18px;
+    line-height: 22px;
+   font-family:pantonRegular;
+}
+.row{
+	margin:0;
+}
+.col-lg-1, .col-lg-10, .col-lg-11, .col-lg-12, .col-lg-2, .col-lg-3, .col-lg-4, .col-lg-5, .col-lg-6, .col-lg-7, .col-lg-8, .col-lg-9, .col-md-1, .col-md-10, .col-md-11, .col-md-12, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-sm-1, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, .col-sm-8, .col-sm-9, .col-xs-1, .col-xs-10, .col-xs-11, .col-xs-12, .col-xs-2, .col-xs-3, .col-xs-4, .col-xs-5, .col-xs-6, .col-xs-7, .col-xs-8, .col-xs-9{
+	padding:0;
+}
+a:focus, a:hover{
+	text-decoration:none;
+}
+#submit_button
+{
+height: 29px;
+    margin-top: 20px;
+font-size:11px;
+font-weight:bold;
+}
+#postcode
+{
+margin-top:20px;
+width:100%;
+}
+#stocklist form
+{
+display:flex;
+}
+
+#stocklist
+{
+min-height:300px;
+background-color:#0086FF;
+}
+.center_align
+{
+padding-top:20px;
+color:white;
+text-align:center;
+}
+/*Header CSS*/
+.header-type-1{
+	position: absolute;
+width:100%;
+    height: 649px;
+}
+.header-type-2{
+position: absolute;
+width:100%;
+	border-bottom: 1px solid rgba(1, 1, 1, 0.3);
+}
+.header-inner{
+	height: 91px;
+    padding: 16.5px 58px 16.5px 36px;
+    box-sizing: border-box;
+	z-index: 1;
+    position: relative;
+}
+.header-inner i{
+	font-size:30px;
+	color:black;
+
+}
+.icon-container{
+    display: inline-block;
+}
+.side-menu .icon-container{
+	margin-right:18px;	
+}
+header .side-menu .icon-container:last-of-type,footer .side-menu .icon-container:last-of-type{
+	margin-right:0px;		
+}
+.side-menu{
+	text-align:right;
+}
+.main-menu{
+	display:none;
+}
+/*Footer CSS*/
+footer{
+	    height: 240px;
+    padding-top: 30px;
+}
+
+footer ul{
+	list-style:none;
+	overflow:hidden;
+	padding:0;
+}
+footer a{
+	color:black;
+}
+.footer-main-list{
+	font-family:helveticaBold;
+}
+.footer-main-list>li{
+	float: left;
+    display: block;
+    width: 28%;
+}
+
+.footer-main-list ul{
+	padding-left:0;
+	font-family:helveticaRoman;
+}
+.list-1 li:nth-child(2){
+	width:44%;
+}
+
+footer i{
+	font-size:30px !important;
+	color:black;
+
+}
+footer .side-menu{
+	padding-right:58px;
+}
+section{
+	margin-bottom:30px;
+}
+.elanco-footer{
+	    border-top: 1px solid rgba(1, 1, 1, 0.3);
+		padding-top: 10px;
+    padding-bottom: 10px;
+	font-size: 13.955px;
+  font-family: "Helvetica";
+  color: rgb(0, 0, 0);
+  line-height: 1.2;
+}
+.elanco-footer li:first-child {
+    padding-left: 0 !important;
+    border-left: none;
+}
+.elanco-footer li {
+    width: auto;
+    border-left: 1px solid #806666;
+    padding: 0 5px;
+}
+@media (min-width: 768px) and (max-width:1024px){
+	
+	.side-menu .icon-container {
+		margin-right: 15px;
+	}
+	footer{
+		
+		height:auto;
+	}
+	.main-footer{
+		padding:0 3%;
+	}
+	footer .side-menu{
+		padding-right:28px;
+	}	
+}
+@media (max-width:767px){
+	.header-inner{
+		padding: 16.5px 10px;
+	}
+	.side-menu .icon-container{
+		margin-right:5px;
+	}	
+	footer{
+		padding-left:6%;
+		padding-right:6%;
+		height:auto;
+	}
+
+	.footer-main-list li{
+		width:33% !important;
+	}
+	
+	.footer-sub-list li{
+		width:100% !important;
+	}
+	footer .side-menu{
+		padding-right:0px;
+		text-align:center;
+		margin-top:30px;
+	}
+	.elanco-footer{
+		margin-top:30px;
+		
+	}
+	.elanco-footer ul li{
+		width:100%;
+		border:none;
+		padding:0;
+	}
+	
+}
