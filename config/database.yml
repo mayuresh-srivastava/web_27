@@ -26,3 +26,16 @@
 
 development:
  adapter: postgresql
+ host: localhost
+ database: db27
+ username: web27
+ password:  web27
+ 
+production: 
+ adapter: postgresql
+ host: ec2-54-243-201-116.compute-1.amazonaws.com
+ database: d3tm72mrcbt2l3
+ username: ydkwfweohknfyy
+ password:  9FDVJoqKEa3k5xZaBglMLMtgUC
+ 
+ 
