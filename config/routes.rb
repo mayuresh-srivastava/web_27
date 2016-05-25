@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  get 'postcode/index'
 
-  get 'home/index'
+get 'postcode/index' => 'postcode#index', as: 'search_postcodes'
+
+get 'home/index' => 'home#index'
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

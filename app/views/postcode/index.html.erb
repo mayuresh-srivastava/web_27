@@ -1,2 +1,227 @@
-<h1>Postcode#index</h1>
-<p>Find me in app/views/postcode/index.html.erb</p>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> 
+  <link href="master.css.scss" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+  
+<header class="header-type-2">
+		<div class="header-inner">
+		<div class="row">
+			<div class="col-xs-3 col-sm-6">
+				 <div class="icon-container">
+				   
+				<% client = Contentful::Client.new(
+  access_token: '4a08907fda227704d43a516981fe057f7fdbe90ecf094b58118003ece3c84fbe',
+  space: 'i3qt1vuoqo6u',
+  dynamic_entries: :auto
+  )
+  
+          @c1 = client.asset('4G9eBX54F2ecIEMc2yk6sa').image_url
+          @c2 = client.asset('5FYYUbxIacIKe80kuQqOmI').image_url
+          @c3 = client.asset('7AIew9yF1eKUG8y8qyMmG0').image_url
+          @menu = client.asset('2fCEU0gJGUMaw2s2aQiKiM').image_url
+          @search = client.asset('4rkCn76Ffyk8YigEiCa0W').image_url
+          @share = client.asset('3q5ym9HkzCmwswCQYyYEqU').image_url
+          @logo = client.asset('7fANz56pfawqK46uOykQM0').image_url
+          @footer2 = client.entry '7svpjyfW6cmC46MgaWiUGe'
+          @ssection = client.entry '2Ku3sQvAHSGSccOSE6MwSi'
+          @footer1 = client.entry '1ovyEWh7GA8s4mKgmM2oEc'
+          %>
+          
+		  <img src="<%= @menu %>" data-toggle="collapse" data-target=".main-menu" aria-hidden="true"></img>
+				  
+				  </div>
+				  <!-- <ul class="main-menu">
+                    <li><a href="#"></a></li>
+					<li><a href="#"></a></li>
+					<li><a href="#"></a></li>
+					<li><a href="#"></a></li>
+                </ul> -->
+			</div>
+			<div class="col-xs-9 col-sm-6">
+				<div class="side-menu">
+					<div class="icon-container"><a href="#"><img src="<%= @search %>"/></a></div>
+					<div class="icon-container"><a href="#"><img src="<%= @share %>" /></a></div>
+				</div>
+			</div>
+		</div>
+		</div>
+		
+		
+	</header>
+	<section id="myCarousel">
+
+ <div id="myCarousel" class="carousel slide" data-ride="carousel">
+ 	                                                          <!-- data-interval="false" -->
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+      <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+      <li data-target="#myCarousel" data-slide-to="1"></li>
+      <li data-target="#myCarousel" data-slide-to="2"></li>
+     
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner" role="listbox">
+      <div class="item active">
+        <img src="<%= @c1 %>" >
+      </div>
+
+      <div class="item">
+        <img src="<%= @c2 %>">
+      </div>
+    
+      <div class="item">
+        <img src=" <%= @c3 %>" >
+      </div>
+
+    </div>
+
+    <!-- Left and right controls -->
+    <a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev" >
+      <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+      <span class="sr-only">Previous</span>
+    </a>
+    <a class="right carousel-control" href="#myCarousel" role="button" data-slide="next" >
+      <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+      <span class="sr-only">Next</span>
+    </a>
+  </div>
+
+		
+	</section>
+      <section id="stocklist">
+
+          <h2 class="center_align">
+          	
+          	<%= @ssection.fields[:title] %>
+          	
+          </h2>
+          <h4 class="center_align"><%= @ssection.fields[:description] %></h4>
+          <div class="row">
+              <div class="col-xs-6 col-xs-offset-3">
+              	
+              	<%#= form_for postcode_index_path, :method => 'GET' do |f| %>
+             	
+          <!--     	<div id = "postcode" class="center_align_input" > -->
+              	<%#= f.text_field params[:search] %>
+          <!--     	</div>  -->  
+          <!--     	<div id = "submit_button" > -->  
+                <%#= f.submit @ssection.fields[:button], :name => nil %>
+         <!--        </div>  -->  
+              
+                <%# end %>
+                
+                  <%#= form_tag search_postcodes_path do %>
+
+             <!--         <input type=" text" name="query" id="postcode" class="center_align_input"> -->
+             <!--         <input type="submit" value="<%#= @ssection.fields[:button] %>" id="submit_button"> -->
+
+                  <%# end %>
+                  
+           <%= render :partial => 'shared/form' %>
+            
+
+ <% @postcodes.each do |x| %>
+ <%= x.address %><br />
+ <%= x.city %><br />
+ <%= x.state %><br />
+ <%= x.country %><br />
+ 
+ <% end %>
+            
+              </div>
+              </div>
+</section>
+      </section>
+	<footer>
+	<div class="main-footer">
+		<div class="row">
+			<div class="col-xs-12 col-sm-9 col-md-8 col-md-offset-1">
+				<div class="row">
+					<div class="col-xs-12 col-sm-6">
+						<ul class="footer-main-list list-1">
+							<li><a href="<%= @footer1.fields[:homeUrl] %>" target="_blank"><%= @footer1.fields[:home] %></li>
+							<li>
+								<a href="<%= @footer1.fields[:prtctUrl][0] %>" target="_blank"><%= @footer1.fields[:protect][0] %></a>
+								<ul class="footer-sub-list">
+								<li><a href="<%= @footer1.fields[:prtctUrl][1] %>"><%= @footer1.fields[:protect][1] %></a></li>
+								<li><a href="<%= @footer1.fields[:prtctUrl][2] %>"><%= @footer1.fields[:protect][2] %></a></li>
+								</ul>
+								</li>
+								<li>
+								<a href="<%= @footer1.fields[:ofrUrl][0] %>" target="_blank"><%= @footer1.fields[:ofr][0] %></a>
+								<ul class="footer-sub-list">
+								<li><a href="<%= @footer1.fields[:ofrUrl][1] %>"><%= @footer1.fields[:ofr][1] %></a></li>
+								<li><a href="<%= @footer1.fields[:ofrUrl][2] %>"><%= @footer1.fields[:ofr][2] %></a></li>
+								</ul>
+							</li>
+						</ul>
+					</div>
+					<div class="col-xs-12 col-sm-6 col-md-5 col-md-offset-1">
+						<ul class="footer-main-list">
+					<li>
+						<a href="<%= @footer1.fields[:prdctUrl][0] %>" target="_blank"><%= @footer1.fields[:prdct][0] %></a>
+						<ul class="footer-sub-list">
+							<li><a href="<%= @footer1.fields[:prdctUrl][1] %>"><%= @footer1.fields[:prdct][1] %></a></li>
+							<li><a href="<%= @footer1.fields[:prdctUrl][2] %>"><%= @footer1.fields[:prdct][2] %></a></li>
+							<li><a href="<%= @footer1.fields[:prdctUrl][3] %>"><%= @footer1.fields[:prdct][3] %></a></li>
+							<li><a href="<%= @footer1.fields[:prdctUrl][4] %>"><%= @footer1.fields[:prdct][4] %></a></li>
+							<li><a href="<%= @footer1.fields[:prdctUrl][5] %>"><%= @footer1.fields[:prdct][5] %></a></li>
+							
+						</ul>
+					</li>
+					<li>
+						<a href="<%= @footer1.fields[:nwsUrl][0] %>" target="_blank"><%= @footer1.fields[:nws][0] %></a>
+						<ul class="footer-sub-list">
+							<li><a href="<%= @footer1.fields[:nwsUrl][1] %>"><%= @footer1.fields[:nws][1] %></a></li>
+						</ul>
+					</li>
+					<li><a href="<%= @footer1.fields[:fslUrl] %>" target="_blank"><%= @footer1.fields[:fsl] %></a></li>
+				</ul>
+					</div>
+				</div>
+			</div>
+			<div class="col-xs-12 col-sm-3 col-md-3 col-lg-2 col-lg-offset-1">
+				<div class="side-menu">
+					<div class="icon-container"><a href="#"><img src="<%= @search %>"/></a></div>
+					<div class="icon-container"><a href="#"><img src="<%= @share %>"/></a></div>
+				</div>
+			</div>
+		</div>
+		</div>
+		<div class="elanco-footer">
+		<div class="container">
+			<div class="row">
+				 <div class="col-xs-6 col-sm-8">
+                            <ul class="list-inline clearfix">
+								<li class=""><a href="<%= @footer2.fields[:ahd] %>" target="_blank"><%= @footer2.fields[:ahdd] %></a></li>
+								<li class=""><a href="<%= @footer2.fields[:contact] %>" target="_blank"><%= @footer2.fields[:ctnt] %></a></li>
+								<li class=""><a href="<%= @footer2.fields[:touUrl] %>" target="_blank"><%= @footer2.fields[:tou] %></a></li>
+								<li class=""><a href="<%= @footer2.fields[:prurl] %>" target="_blank"><%= @footer2.fields[:privacy] %></a></li>
+								<li class=""><a href="<%= @footer2.fields[:tmurl] %>" target="_blank"><%= @footer2.fields[:tm] %></a></li>
+                            </ul>
+                 </div>
+				 <div class="col-xs-6 col-sm-4">
+                            <a href="#" target="_blank">
+                                <img alt="Animal" class="pull-right" src="<%= @logo %>" width="69" height="36"></a>
+                      </div>
+			</div>
+			</div>
+		</div>
+	</footer>
+  
+
+</body>
+</html>
+
+
+
+
