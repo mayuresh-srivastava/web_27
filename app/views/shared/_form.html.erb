@@ -1,5 +1,5 @@
 <%= form_tag search_postcodes_path, :method => 'get' do %>
-<%= text_field_tag :search, params[:search] %>
+<%= text_field_tag :pattern, params[:pattern] %>
 <%= submit_tag @ssection.fields[:button], :name => nil %>
 <% end %>
 

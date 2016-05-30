@@ -1,5 +1,6 @@
 class Postcode < ActiveRecord::Base
     
+#    validates_presence_of :search
 #    searchkick
 #    def self.search(search)
 #     if search  
@@ -11,10 +12,10 @@ class Postcode < ActiveRecord::Base
 #     end    
 #    end
 
-  def self.search(search)
+  def self.search(pattern)
         
-        if search
-           self.where("pstcode LIKE ?", "%#{search}%")
+        if pattern
+          self.where("pstcode LIKE ?", "%#{pattern}%" ) 
         else
           self.all
         end 

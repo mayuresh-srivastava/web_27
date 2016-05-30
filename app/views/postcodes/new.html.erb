@@ -126,17 +126,14 @@
 
                   <%# end %>
                   
-           <%= render :partial => 'shared/form' %>
-            
+           <%#= render :partial => 'shared/form' %>
 
- <% @postcodes.each do |x| %>
- <%= x.address %><br />
- <%= x.city %><br />
- <%= x.state %><br />
- <%= x.country %><br />
- 
- <% end %>
-            
+
+<%= render 'form' %>
+
+<%= link_to 'Back', search_postcodes_path %>
+
+
               </div>
               </div>
 </section>
@@ -221,6 +218,7 @@
 
 </body>
 </html>
+
 
 
 

@@ -1,0 +1,23 @@
+<%= form_for @postcode  do |f| %>
+
+    <table border=1>
+    <tr>    
+    <th><%= f.label :postcode %></th>
+    <th><%= f.label :address %></th>
+    <th><%= f.label :city %></th>
+    <th><%= f.label :state %></th>
+    <th><%= f.label :country %></th>
+    </tr>
+    
+    <tr>
+    <td><%= f.text_field :pstcode %></td>
+    <td><%= f.text_field :address %></td>
+    <td><%= f.text_field :city %></td> <!-- :readonly => true -->
+    <td><%= f.text_field :state %></td>
+    <td><%= f.text_field :country %></td>
+    </tr>
+    </table>
+    
+    <%= f.submit "Submit" %>
+  
+<% end %>

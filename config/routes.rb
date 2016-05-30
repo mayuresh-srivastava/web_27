@@ -1,8 +1,16 @@
 Rails.application.routes.draw do
 
-get 'postcode/index' => 'postcode#index', as: 'search_postcodes'
+get 'postcodes/pstsearch' => 'postcodes#pstsearch', as: 'search_postcodes'
 
 get 'home/index' => 'home#index'
+
+#get 'postcode/:id/edit' => 'postcode#edit', as: 'edit_postcode'
+
+#get 'postcode/new' => 'postcode#new', as: 'new_postcode'
+
+#post 'postcode' => 'postcode#create'
+
+resources :postcodes
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
