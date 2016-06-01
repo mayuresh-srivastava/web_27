@@ -1,0 +1,9 @@
+$("#mynewpostcode").modal('hide');
+$(".postcode_pstcode").val('');
+$(".postcode_address").val('');
+$(".postcode_city").val('');
+$(".postcode_state").val('');
+$(".postcode_country").val('');
+
+$("#container_postcodes").prepend('<%= j render @postcode %>');
+$("#postcode_<%= @postcode.id %>").hide().fadeIn(1000);

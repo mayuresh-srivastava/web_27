@@ -1,11 +1,19 @@
 class PostcodesController < ApplicationController
+#  skip_before_filter :verify_authenticity_token
+  #respond_to :js
+
   
   def index
-    @postcodes = Postcode.all
+    #@postcodes = Postcode.all
+    
+    @postcodes = Postcode.search(params[:pattern])
+       
+    @postcode = Postcode.new
+    
   end
   
   def show
-    @postcode = Postcode.find(params[:id]) 
+    #@postcode = Postcode.find(params[:id]) 
   end
   
   def new
@@ -22,51 +30,59 @@ class PostcodesController < ApplicationController
     if @postcode.save
       #flash.now[:notice] = "You signed up successfully."
       #flash.now[:color]= "valid"
-      redirect_to search_postcodes_path
+      format.html {redirect_to postcodes_path}
+      format.js
     else
       #flash.now[:notice] = "Something wrongly filled." 
       #flash.now[:color]= "invalid"
-      render "new"
+      format.html {render :new}
+      format.js
     end
   end
   
-  def pstsearch
+#  def pstsearch
+    
       
-         @postcodes = Postcode.search(params[:pattern])
-#  if params[:search]
-#    @posts = Postcode.search(params[:search]).order("created_at DESC")
-#  else
-#    @posts = Postcode.all.order('created_at DESC')
+#         @postcodes = Postcode.search(params[:pattern])
+         
+#         @postcode = Postcode.new
+
+=begin
+  if params[:search]
+   @posts = Postcode.search(params[:search]).order("created_at DESC")
+  else
+    @posts = Postcode.all.order('created_at DESC')
+  end
+=end
+  
 #  end
   
-  end
-  
   def update
+    
+    respond_to do |format|
   @postcode = Postcode.find(params[:id])
  
   if @postcode.update(postcode_params)
-    redirect_to search_postcodes_path
+    format.html {redirect_to postcodes_path}
+    format.js #{ render layout: false, content_type: 'text/javascript' }
   else
-    render 'edit'
+    format.html {render :edit}
+    format.js #{ render layout: false, content_type: 'text/javascript' }
   end
+  end
+  
+  
   end
   
   def destroy
     
     @postcode = Postcode.find(params[:id])
     @postcode.destroy
-    redirect_to search_postcodes_path
+    format.html {redirect_to postcodes_path}
+    format.js
   
   end
   
-  
-  
-  
-#  def search
-#   @q = "%#{params[:query]}%"
-#   @postcodes = Postcode.where("pstcode ILIKE ? or address ILIKE ? or city ILIKE ?", @q, @q, @q)
-#   render 'index'
-#   end 
 
  private
  

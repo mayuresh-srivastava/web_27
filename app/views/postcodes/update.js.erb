@@ -1,0 +1,10 @@
+
+$("#myupdatepostcode_<%= @postcode.id %>").modal('hide');
+
+$("#postcode_<%= @postcode.id %>").fadeOut(500, function(){
+   
+   $(this).remove();
+   $("#container_postcodes").prepend('<%= j render @postcode %>');
+
+});
+

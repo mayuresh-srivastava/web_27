@@ -1,8 +1,8 @@
 Rails.application.routes.draw do
 
-get 'postcodes/pstsearch' => 'postcodes#pstsearch', as: 'search_postcodes'
+#get 'postcodes/index' => 'postcodes#pstsearch', as: 'search_postcodes'
 
-get 'home/index' => 'home#index'
+#get 'home/index' => 'home#index'
 
 #get 'postcode/:id/edit' => 'postcode#edit', as: 'edit_postcode'
 
@@ -16,7 +16,7 @@ resources :postcodes
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'home#index'
+  root 'postcodes#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

@@ -1,0 +1,82 @@
+<div class="col-md-4 blog-main box text-center" id="postcode_<%= postcode.id %>">
+    
+    <div class="panel panel-info"> <!-- Panel Info -->
+        
+        <div class="panel-heading">
+            <h3 class="panel-title"><%= postcode.pstcode %></h3>
+            <p><%= postcode.address %></p>
+            <p><%= postcode.city %></p>
+            <p><%= postcode.state %></p>
+            <p><%= postcode.country %></p>
+        </div>
+        
+        <div class="panel-body"> <!-- Panel Body -->
+            <div style="color: #00FFFF;"><%= time_ago_in_words(postcode.created_at) %></div>
+            <br>
+            
+             
+  
+            <div class="btn-group" role="group" aria-label="...">
+              
+      <!-- Button trigger modal -->
+                 
+                  <button type="button" class="btn btn-primary btn-md" data-toggle="modal" data-target="#mynewpostcode">
+                  New Postcode
+                  </button>
+                  
+                  <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#myupdatepostcode_<%= postcode.id %>">
+                    Edit
+                </button>   
+                <%= link_to 'Destroy', postcode, method: :delete, class: "btn btn-danger", remote: true %>
+            </div>
+        </div> <!-- Panel Body -->
+    </div> <!-- Panel Info -->
+
+<!-- Modal -->
+<%= form_for(postcode, :method => :put, remote: true) do|f| %>
+<div class="modal fade" id="myupdatepostcode_<%= postcode.id %>" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Edit Suburb</h4>
+      </div>
+      <div class="modal-body">
+          
+        <div class="field">
+          <%= f.label :postcode %><br>
+          <%= f.text_area :pstcode, class: "form-control" %>
+        </div>
+        
+        <div class="field">
+          <%= f.label :address %><br>
+          <%= f.text_area :address, class: "form-control" %>
+        </div>
+        
+        <div class="field">
+          <%= f.label :city %><br>
+          <%= f.text_area :city, class: "form-control" %>
+        </div>
+        
+        <div class="field">
+          <%= f.label :state %><br>
+          <%= f.text_area :state, class: "form-control" %>
+        </div>
+        
+        <div class="field">
+          <%= f.label :country %><br>
+          <%= f.text_area :country, class: "form-control" %>
+        </div>
+        
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" id="myupdatebutton_<%= postcode.id %>">Close</button>
+        <%= submit_tag "Update", class: "btn btn-primary" %>
+      </div>
+    </div>
+  </div>
+</div>
+<% end %>
+<!--------------------------------Modal------------------>
+    
+</div>
