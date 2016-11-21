@@ -1,15 +1,35 @@
 class PostcodesController < ApplicationController
 #  skip_before_filter :verify_authenticity_token
-  #respond_to :js
-
+  respond_to :html
+  respond_to :js
+  require 'json'
   
   def index
-    #@postcodes = Postcode.all
     
-    @postcodes = Postcode.search(params[:pattern])
-       
-    @postcode = Postcode.new
-    
+  client = Contentful::Client.new(
+  access_token: '4a08907fda227704d43a516981fe057f7fdbe90ecf094b58118003ece3c84fbe',
+  space: 'i3qt1vuoqo6u',
+  dynamic_entries: :auto
+  )
+  
+  content_type = client.entries(content_type: 'web27')
+  
+  jsonstring = content_type.to_json
+  
+  @jsonobj=JSON.parse(jsonstring)
+  @length=@jsonobj.length
+  @result =@jsonobj[0]["fields"]["en-US"]["allTxt"]
+  
+  @len = @jsonobj[0]["fields"]["en-US"]["allImg"].length
+  #  @url = @jsonobj[0]["fields"]["en-US"]["allImg"][i]["fields"]["en-US"]["file"]["properties"]["url"]
+  @url = @jsonobj[0]["fields"]["en-US"]["allImg"]
+
+  @postcodes = Postcode.all
+  
+  @postcodes = Postcode.search(params[:pattern])
+     
+  #@postcode = Postcode.new
+  
   end
   
   def show
@@ -17,36 +37,44 @@ class PostcodesController < ApplicationController
   end
   
   def new
+    respond_to do |format|
     @postcode = Postcode.new
+    format.js
+   end
   end
   
-  def edit   
+  def edit
+    respond_to do |format|
      @postcode = Postcode.find(params[:id]) #rescue nil
+    format.js
+    end
   end  
   
   def create
+    
+    respond_to do |format|
     @postcode = Postcode.new(postcode_params)
 
     if @postcode.save
       #flash.now[:notice] = "You signed up successfully."
       #flash.now[:color]= "valid"
-      format.html {redirect_to postcodes_path}
-      format.js
+      format.html {redirect_to @postcode}
+      format.js 
     else
       #flash.now[:notice] = "Something wrongly filled." 
       #flash.now[:color]= "invalid"
       format.html {render :new}
-      format.js
+      format.js 
+    end
     end
   end
   
-#  def pstsearch
+# def pstsearch
     
-      
-#         @postcodes = Postcode.search(params[:pattern])
+    #    @postcodes = Postcode.search(params[:pattern])
          
-#         @postcode = Postcode.new
-
+     #    @postcode = Postcode.new
+        
 =begin
   if params[:search]
    @posts = Postcode.search(params[:search]).order("created_at DESC")
@@ -55,15 +83,15 @@ class PostcodesController < ApplicationController
   end
 =end
   
-#  end
+# end
   
   def update
     
-    respond_to do |format|
+  respond_to do |format|
   @postcode = Postcode.find(params[:id])
  
   if @postcode.update(postcode_params)
-    format.html {redirect_to postcodes_path}
+    format.html {redirect_to @postcode}
     format.js #{ render layout: false, content_type: 'text/javascript' }
   else
     format.html {render :edit}
@@ -76,10 +104,12 @@ class PostcodesController < ApplicationController
   
   def destroy
     
+    respond_to do |format|
     @postcode = Postcode.find(params[:id])
     @postcode.destroy
     format.html {redirect_to postcodes_path}
     format.js
+    end
   
   end
   

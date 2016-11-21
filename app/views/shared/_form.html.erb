@@ -1,6 +1,6 @@
 <%= form_tag postcodes_path, :method => 'get' do %>
 <%= text_field_tag :pattern, params[:pattern] %>
-<%= submit_tag @ssection.fields[:button], :name => nil %>
+<%= submit_tag @result[2], :name => nil %>
 <% end %>
 
 

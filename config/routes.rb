@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
 
-#get 'postcodes/index' => 'postcodes#pstsearch', as: 'search_postcodes'
+#get 'postcodes/pstsearch' => 'postcodes#pstsearch', as: 'search_postcodes'
 
 #get 'home/index' => 'home#index'
 

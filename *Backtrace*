@@ -1,0 +1,4 @@
+Debugger entered--Lisp error: (void-variable mmma)
+  eval(mmma nil)
+  eval-expression(mmma nil)
+  call-interactively(eval-expression nil nil)

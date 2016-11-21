@@ -9,7 +9,7 @@
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap-theme.min.css"> -->
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>
 <!--  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script> -->
-  <link href="master.css.scss" rel="stylesheet" type="text/css"/>
+<!--  <link href="master.css.scss" rel="stylesheet" type="text/css"/> -->
 </head>
 <body>
   
@@ -18,7 +18,9 @@
 		<div class="row">
 			<div class="col-xs-3 col-sm-6">
 				 <div class="icon-container">
-				   
+				  
+				  
+
 				<% client = Contentful::Client.new(
   access_token: '4a08907fda227704d43a516981fe057f7fdbe90ecf094b58118003ece3c84fbe',
   space: 'i3qt1vuoqo6u',
@@ -28,16 +30,22 @@
           @c1 = client.asset('4G9eBX54F2ecIEMc2yk6sa').image_url
           @c2 = client.asset('5FYYUbxIacIKe80kuQqOmI').image_url
           @c3 = client.asset('7AIew9yF1eKUG8y8qyMmG0').image_url
-          @menu = client.asset('2fCEU0gJGUMaw2s2aQiKiM').image_url
-          @search = client.asset('4rkCn76Ffyk8YigEiCa0W').image_url
-          @share = client.asset('3q5ym9HkzCmwswCQYyYEqU').image_url
-          @logo = client.asset('7fANz56pfawqK46uOykQM0').image_url
+         # @menu = client.asset('2fCEU0gJGUMaw2s2aQiKiM').image_url
+         # @search = client.asset('4rkCn76Ffyk8YigEiCa0W').image_url
+         # @share = client.asset('3q5ym9HkzCmwswCQYyYEqU').image_url
+         # @logo = client.asset('7fANz56pfawqK46uOykQM0').image_url
           @footer2 = client.entry '7svpjyfW6cmC46MgaWiUGe'
-          @ssection = client.entry '2Ku3sQvAHSGSccOSE6MwSi'
+        # @ssection = client.entry '2Ku3sQvAHSGSccOSE6MwSi'
           @footer1 = client.entry '1ovyEWh7GA8s4mKgmM2oEc'
           %>
           
-		  <img src="<%= @menu %>" data-toggle="collapse" data-target=".main-menu" aria-hidden="true"></img>
+         
+
+                  <%#=@url[i]["fields"]["en-US"]["file"]["properties"]["url"]%>
+
+                  
+                  
+		  <img src="<%=@url[2]["fields"]["en-US"]["file"]["properties"]["url"]%>" data-toggle="collapse" data-target=".main-menu" aria-hidden="true"></img>
 				  
 				  </div>
 				  <!-- <ul class="main-menu">
@@ -49,8 +57,8 @@
 			</div>
 			<div class="col-xs-9 col-sm-6">
 				<div class="side-menu">
-					<div class="icon-container"><a href="#"><img src="<%= @search %>"/></a></div>
-					<div class="icon-container"><a href="#"><img src="<%= @share %>" /></a></div>
+					<div class="icon-container"><a href="#"><img src="<%=@url[1]["fields"]["en-US"]["file"]["properties"]["url"]%>"/></a></div>
+					<div class="icon-container"><a href="#"><img src="<%=@url[0]["fields"]["en-US"]["file"]["properties"]["url"]%>" /></a></div>
 				</div>
 			</div>
 		</div>
@@ -103,10 +111,10 @@
 
           <h2 class="center_align">
           	
-          	<%= @ssection.fields[:title] %>
+          	<%#= @ssection.fields[:title] %><%=@result[0]%>
           	
           </h2>
-          <h4 class="center_align"><%= @ssection.fields[:description] %></h4>
+          <h4 class="center_align"><%#= @ssection.fields[:description] %><%=@result[1]%></h4>
           <div class="row">
               <div class="col-xs-6 col-xs-offset-3">
               	
@@ -131,7 +139,8 @@
            <%= render :partial => 'shared/form' %>
 
 <% if params[:pattern].present? %>
-<!--
+<!--<div class="my-postcodes">
+	
 <table border=1>
 	<tr>
 <th>Postcode</th>
@@ -140,85 +149,24 @@
 <th>State</th>
 <th>Country</th>
 </tr> 
-
- <%# @postcodes.each do |x| %>
+ <%# @postcodes.each do |postcode| %>
  <tr>
-<td><%#= x.pstcode %></td>
-<td><%#= x.address %></td>
-<td><%#= x.city %></td>
-<td><%#= x.state %></td>
-<td><%#= x.country %></td>
-
-<td><%#= link_to 'Edit', edit_postcode_path(x) %></td>
-<td><%#= link_to 'Delete', postcode_path(x), method: :delete, data: { confirm: 'Are you sure?' } %></td>
-<td><%#= link_to 'New', new_postcode_path %></td>
-
-</tr>
-<%# end %>
-</table> 
+<td><%#= postcode.pstcode %></td>
+<td><%#= postcode.address %></td>
+<td><%#= postcode.city %></td>
+<td><%#= postcode.state %></td>
+<td><%#= postcode.country %></td>
 -->
-
-<div class="container">
-  
-  <div class="row">
-    <div class="text-center">
-      <!-- Button trigger modal -->
-      <!--<button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#mynewpost">
-      New Post
-      </button> -->
-    </div>
-  </div>
- 
-  <div class="row" id="container_postcodes">
-    <%= render @postcodes %>
-  </div>
-  
-
-<!-- Modal -->
-<%= form_for(@postcode, remote: true) do|f| %>
-<div class="modal fade" id="mynewpostcode" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Postcode</h4>
-      </div>
-      
-      <div class="modal-body">
-        <div class="field">
-          <%= f.label :postcode %><br>
-          <%= f.text_area :pstcode, class: "form-control postcode_pstcode" %>
-        </div>
-        <div class="field">
-          <%= f.label :address %><br>
-          <%= f.text_area :address, class: "form-control postcode_address" %>
-        </div>
-        <div class="field">
-          <%= f.label :city %><br>
-          <%= f.text_area :city, class: "form-control postcode_city" %>
-        </div>
-        <div class="field">
-          <%= f.label :state %><br>
-          <%= f.text_area :state, class: "form-control postcode_state" %>
-        </div>
-        <div class="field">
-          <%= f.label :country %><br>
-          <%= f.text_area :country, class: "form-control postcode_country" %>
-        </div>
-      </div>
-      
-      <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal" id="mynewpostclose">Close</button>
-        <%= submit_tag "Create", class: "btn btn-primary" %>
-      </div>
-    </div>
-  </div>
-</div>
+<div class="my-postcodes">
+	<% @postcodes.each do |postcode| %>
+<%= render postcode %>
 <% end %>
-<!--------------------------------Modal------------------>
-
 </div>
+
+<%= link_to 'New', new_postcode_path, remote: true, class: "new-postcode-button" %>
+
+<%# end %>
+
 <% else %>
 
 <% end %> 
@@ -277,8 +225,8 @@
 			</div>
 			<div class="col-xs-12 col-sm-3 col-md-3 col-lg-2 col-lg-offset-1">
 				<div class="side-menu">
-					<div class="icon-container"><a href="#"><img src="<%= @search %>"/></a></div>
-					<div class="icon-container"><a href="#"><img src="<%= @share %>"/></a></div>
+					<div class="icon-container"><a href="#"><img src="<%=@url[1]["fields"]["en-US"]["file"]["properties"]["url"]%>"/></a></div>
+					<div class="icon-container"><a href="#"><img src="<%=@url[0]["fields"]["en-US"]["file"]["properties"]["url"]%>"/></a></div>
 				</div>
 			</div>
 		</div>
@@ -297,7 +245,7 @@
                  </div>
 				 <div class="col-xs-6 col-sm-4">
                             <a href="#" target="_blank">
-                                <img alt="Animal" class="pull-right" src="<%= @logo %>" width="69" height="36"></a>
+                                <img alt="Animal" class="pull-right" src="<%=@url[3]["fields"]["en-US"]["file"]["properties"]["url"]%>" width="69" height="36"></a>
                       </div>
 			</div>
 			</div>
@@ -307,8 +255,3 @@
 
 </body>
 </html>
-
-
-
-
-

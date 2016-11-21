@@ -1,0 +1,2 @@
+Pry.config.prompt = Proc.new( { " mayur@ruby " }, 
+                              { "          > " } )

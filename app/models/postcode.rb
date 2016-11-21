@@ -15,7 +15,7 @@ class Postcode < ActiveRecord::Base
   def self.search(pattern)
         
         if pattern
-          self.where("pstcode LIKE ?", "%#{pattern}%" ) 
+          self.where("pstcode LIKE ? OR country LIKE ? OR address LIKE ?", "%#{pattern}%", "%#{pattern}%", "%#{pattern}%"  )
         else
           self.all
         end 
